@@ -1,0 +1,73 @@
+---
+title: "Test Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    theme: cerulean
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(htmlwidgets)
+library(ggplot2)
+library(slickR)
+library(ggthemes)
+library(magrittr)
+library(knitr)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### 
+
+```{r}
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +
+  geom_point() +
+  geom_smooth(se = FALSE) +
+  ggtitle("Generic Plot") +
+  theme_fivethirtyeight()
+
+```
+
+### Table {data-height=200}
+
+```{r}
+data(mtcars)
+dat <- mtcars[1:6, 1:6]
+kable(dat)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Placeholder Slideshow {data-height=350}
+
+```{r}
+pics <- c("test1.jpg", "test3.jpg", "test4.jpg", "test5.jpg", "test6.jpg", "test2.jpg") %>%
+  paste0("/Users/olsen106/Documents/R Files/TestDashboard/images/", .)
+
+slickR(obj = pics, width = 340, height = 340, slickOpts = list(autoplay = TRUE, autoplaySpeed = 3500, arrows = FALSE, dots = TRUE))
+```
+
+### Marketing
+
+```{r}
+
+gauge(63, min = 0, max = 100, symbol = '%', gaugeSectors(
+  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)
+))
+
+```
+
+### Pricing and Analytics
+
+```{r}
+
+gauge(96, min = 0, max = 100, symbol = '%', gaugeSectors(
+  success = c(80, 100), warning = c(40, 79), danger = c(0, 39)
+))
+
+```
+
